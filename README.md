@@ -1,6 +1,5 @@
 # pyweather
-Weather app in python
-Now with GUI!
+Simple weather app in python with GUI
 
 Required packages:
 requests
