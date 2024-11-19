@@ -14,32 +14,48 @@ def runWeatherGet():
     print("button pressed")
     userBlankInput = userInputCity.get()
     userButtonInput = userInputSystem.get()
-    
     if userButtonInput == 1:
         requestMeasurementSystem = "imperial"
     elif userButtonInput == 2:
         requestMeasurementSystem = "metric"
-        
+    
     getWeatherData = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={userBlankInput}&units={requestMeasurementSystem}&APPID={apiKey}")
     print(getWeatherData.json())
     print(userBlankInput)
     print(userInputSystem)
     
-    weather = (getWeatherData.json()['weather'][0]['main'])
-    temperature = round(getWeatherData.json()['main']['temp'], 2)
-    longitude = round(getWeatherData.json()['coord']['lon'], 5)
-    latitude = round(getWeatherData.json()['coord']['lat'], 5)
-    sunrise = int(getWeatherData.json()['sys']['sunrise'])
-    sunset = int(getWeatherData.json()['sys']['sunset'])
-    timezone = int(getWeatherData.json()['timezone'])
-    sunriseAdjusted = datetime.utcfromtimestamp(sunrise+timezone).strftime('%H:%M')
-    sunsetAdjusted = datetime.utcfromtimestamp(sunset+timezone).strftime('%H:%M')
+    errorCode = (getWeatherData.json()['cod'])
+    print(errorCode)
+    
+    if(errorCode==200):
+        print('code201')
+        weather = (getWeatherData.json()['weather'][0]['main'])
+        temperature = round(getWeatherData.json()['main']['temp'], 2)
+        longitude = round(getWeatherData.json()['coord']['lon'], 5)
+        latitude = round(getWeatherData.json()['coord']['lat'], 5)
+        sunrise = int(getWeatherData.json()['sys']['sunrise'])
+        sunset = int(getWeatherData.json()['sys']['sunset'])
+        timezone = int(getWeatherData.json()['timezone'])
+        sunriseAdjusted = datetime.utcfromtimestamp(sunrise+timezone).strftime('%H:%M')
+        sunsetAdjusted = datetime.utcfromtimestamp(sunset+timezone).strftime('%H:%M')
     
     
-    Label(root, text=f'Current condition in {userBlankInput}: {weather}').place(x=5,y=100)
-    Label(root, text=f'Temperature: {temperature}').place(x=5,y=125)
-    Label(root, text=f'Sunrise: {sunriseAdjusted} local time').place(x=5,y=150)
-    Label(root, text=f'Sunset: {sunsetAdjusted} local time').place(x=5,y=175)
+        Label(root, text=f'Current condition in {userBlankInput}: {weather}').place(x=5,y=100)
+        Label(root, text=f'Temperature: {temperature}').place(x=5,y=125)
+        Label(root, text=f'Sunrise: {sunriseAdjusted} local time').place(x=5,y=150)
+        Label(root, text=f'Sunset: {sunsetAdjusted} local time').place(x=5,y=175)
+    elif(errorCode==401):
+        Label(root, text=f'401: Authentication Error').place(x=5,y=100)
+        print('code401')
+    elif(errorCode==404):
+        Label(root, text=f'404: Invalid City Entered').place(x=5,y=100)
+        print('code404')
+    elif(errorCode==400):
+        Label(root, text=f'400: Invalid City Entered').place(x=5,y=100)
+        print('code400')
+    else:
+        Label(root, text=f'Unknown Error').place(x=5,y=100)
+        print('error')
 
 
 title = Label(root, text='pyweather').grid(row=0)
