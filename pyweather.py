@@ -36,10 +36,10 @@ def runWeatherGet():
     sunsetAdjusted = datetime.utcfromtimestamp(sunset+timezone).strftime('%H:%M')
     
     
-    Label(root, text=f'Current condition in {userBlankInput}: {weather}').grid(row=4,column=1)
-    Label(root, text=f'Temperature: {temperature}').grid(row=5,column=1)
-    Label(root, text=f'Sunrise: {sunriseAdjusted}').grid(row=6,column=1)
-    Label(root, text=f'Sunset: {sunsetAdjusted}').grid(row=6,column=2)
+    Label(root, text=f'Current condition in {userBlankInput}: {weather}').place(x=5,y=100)
+    Label(root, text=f'Temperature: {temperature}').place(x=5,y=125)
+    Label(root, text=f'Sunrise: {sunriseAdjusted} local time').place(x=5,y=150)
+    Label(root, text=f'Sunset: {sunsetAdjusted} local time').place(x=5,y=175)
 
 
 title = Label(root, text='pyweather').grid(row=0)
@@ -51,13 +51,13 @@ userInputCity.grid(row=1, column=1)
 
 userInputSystem = IntVar()
 requestMeasurementSystem = "imperial"
-Radiobutton(root, text='Imperial', variable=userInputSystem, value=1).grid(row=2,column=1)
-Radiobutton(root,text='Metric', variable=userInputSystem, value=2).grid(row=2,column=2)
+Radiobutton(root, text='°F', variable=userInputSystem, value=1).grid(row=1,column=3)
+Radiobutton(root,text='°C', variable=userInputSystem, value=2).grid(row=1,column=4)
 
 print(userInputCity)
 print(requestMeasurementSystem)
 
-goButton=Button(root, text="OK", command=runWeatherGet, width = 5).grid(row=3)
+goButton=Button(root, text="OK", command=runWeatherGet, width = 5).grid(row=1, column=6)
 
 
 mainloop()
