@@ -36,8 +36,7 @@ def runWeatherGet():
     sunsetAdjusted = datetime.utcfromtimestamp(sunset+timezone).strftime('%H:%M')
     
     
-    Label(root, text=f'Current weather in {userBlankInput}: ').grid(row=4,column=1)
-    Label(root, text=f'Condition: {weather}').grid(row=4,column=2)
+    Label(root, text=f'Current condition in {userBlankInput}: {weather}').grid(row=4,column=1)
     Label(root, text=f'Temperature: {temperature}').grid(row=5,column=1)
     Label(root, text=f'Sunrise: {sunriseAdjusted}').grid(row=6,column=1)
     Label(root, text=f'Sunset: {sunsetAdjusted}').grid(row=6,column=2)
