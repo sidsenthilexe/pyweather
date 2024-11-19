@@ -28,24 +28,39 @@ def runWeatherGet():
     print(errorCode)
     
     if(errorCode==200):
-        print('code201')
+        print('code200')
+
+        locName = (getWeatherData.json()['name'])
+
         weather = (getWeatherData.json()['weather'][0]['main'])
+        weatherAdvanced = (getWeatherData.json()['weather'][0]['description'])
+
         temperature = round(getWeatherData.json()['main']['temp'], 2)
+        feelsLikeTemp = round(getWeatherData.json()['main']['feels_like'], 2)
+        minTemp = round(getWeatherData.json()['main']['temp_min'], 2)
+        maxTemp = round(getWeatherData.json()['main']['temp_max'], 2)
+
+        visibility = (getWeatherData.json()['visibility'])
+
+
         longitude = round(getWeatherData.json()['coord']['lon'], 5)
         latitude = round(getWeatherData.json()['coord']['lat'], 5)
+
         sunrise = int(getWeatherData.json()['sys']['sunrise'])
         sunset = int(getWeatherData.json()['sys']['sunset'])
         timezone = int(getWeatherData.json()['timezone'])
         sunriseAdjusted = datetime.utcfromtimestamp(sunrise+timezone).strftime('%H:%M')
         sunsetAdjusted = datetime.utcfromtimestamp(sunset+timezone).strftime('%H:%M')
+
+
     
         if(userComplexity==1):
             print('selectedComplex')
-            #placeholder until testing
+            #locName, weather, temperature.
         elif(userComplexity==2):
             print('selectedAdvanced')
-            #placeholder until testing
-        Label(root, text=f'Current condition in {userBlankInput}: {weather}').place(x=5,y=100)
+            #locName, longitude, latitude, weather, weatherAdvanced, temperature, feelsLikeTemp, minTemp, maxTemp, visibility, sunrise adjusted, sunset adjusted.
+        Label(root, text=f'Current condition in {locName}: {weather}').place(x=5,y=100)
         Label(root, text=f'Temperature: {temperature}').place(x=5,y=125)
         Label(root, text=f'Sunrise: {sunriseAdjusted} local time').place(x=5,y=150)
         Label(root, text=f'Sunset: {sunsetAdjusted} local time').place(x=5,y=175)
