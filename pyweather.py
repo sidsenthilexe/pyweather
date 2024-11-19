@@ -3,18 +3,12 @@ from dotenv import load_dotenv
 from datetime import datetime
 import os
 
-
 from tkinter import *
 root = Tk()
 root.geometry("400x400")
 
 load_dotenv()
 apiKey=os.getenv('apiKey')
-
-
-
-def readyPressed():
-    ready=1
 
 def runWeatherGet():
     print("button pressed")
@@ -31,7 +25,6 @@ def runWeatherGet():
     print(userBlankInput)
     print(userInputSystem)
     
-    
     weather = (getWeatherData.json()['weather'][0]['main'])
     temperature = round(getWeatherData.json()['main']['temp'], 2)
     longitude = round(getWeatherData.json()['coord']['lon'], 5)
@@ -43,8 +36,7 @@ def runWeatherGet():
     sunsetAdjusted = datetime.utcfromtimestamp(sunset+timezone).strftime('%H:%M')
     
     
-
-    Label(root, text=f'Weather for {userBlankInput} ({longitude}, {latitude}):').grid(row=4,column=1)
+    Label(root, text=f'Current weather in {userBlankInput}: ').grid(row=4,column=1)
     Label(root, text=f'Condition: {weather}').grid(row=4,column=2)
     Label(root, text=f'Temperature: {temperature}').grid(row=5,column=1)
     Label(root, text=f'Sunrise: {sunriseAdjusted}').grid(row=6,column=1)
@@ -52,7 +44,6 @@ def runWeatherGet():
 
 
 title = Label(root, text='pyweather').grid(row=0)
-ready = 0
 
 Label(root, text='City: ').grid(row=1)
 userInputCity = Entry(root)
