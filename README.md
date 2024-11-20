@@ -1,9 +1,12 @@
 # pyweather
 Simple weather app in python with GUI
-Work in progress
 * Simple and Advanced modes
 * Metric and Imperial units
 * Now with weather icons!
+
+To Do:
+* Fix text artifacting
+* Fix some weather icons not working properly
 
 <img src="https://cloud-czx72xike-hack-club-bot.vercel.app/0image.png">
 <img src="https://cloud-j88unvbof-hack-club-bot.vercel.app/0image.png">
