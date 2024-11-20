@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from datetime import datetime
 import os
 
+import tkinter as tkinter
 from tkinter import *
 root = Tk()
 root.geometry("600x400")
@@ -10,10 +11,13 @@ root.geometry("600x400")
 load_dotenv()
 apiKey=os.getenv('apiKey')
 
+
 def runWeatherGet():
     print("button pressed")
     userBlankInput = userInputCity.get()
     userButtonInput = userInputSystem.get()
+    userComplexityVar = userComplexity.get()
+    
     if userButtonInput == 1:
         requestMeasurementSystem = "imperial"
     elif userButtonInput == 2:
@@ -51,19 +55,40 @@ def runWeatherGet():
         timezone = int(getWeatherData.json()['timezone'])
         sunriseAdjusted = datetime.utcfromtimestamp(sunrise+timezone).strftime('%H:%M')
         sunsetAdjusted = datetime.utcfromtimestamp(sunset+timezone).strftime('%H:%M')
-
+        
+        iconFile = (getWeatherData.json()['weather'][0]['description'])
+      
+        iconInter = f"{iconFile}.png"
+        image=PhotoImage(file=iconInter)
+        print(iconInter)
+        image2=tkinter.PhotoImage(file=iconInter)
+        imageLabel=tkinter.Label(root,image=image2)
+        imageLabel.place(x=400,y=100)
+        
 
     
-        if(userComplexity==1):
-            print('selectedComplex')
+        if(userComplexityVar==1):
+            print('selectedSimple')
             #locName, weather, temperature.
-        elif(userComplexity==2):
+            Label(root, text=f'Current weather in {locName}: {weather}').place(x=5,y=100)
+            Label(root, text=f'Temperature: {temperature}').place(x=5,y=125)
+            imageLabel.Pack()
+        elif(userComplexityVar==2):
             print('selectedAdvanced')
             #locName, longitude, latitude, weather, weatherAdvanced, temperature, feelsLikeTemp, minTemp, maxTemp, visibility, sunrise adjusted, sunset adjusted.
-        Label(root, text=f'Current condition in {locName}: {weather}').place(x=5,y=100)
-        Label(root, text=f'Temperature: {temperature}').place(x=5,y=125)
-        Label(root, text=f'Sunrise: {sunriseAdjusted} local time').place(x=5,y=150)
-        Label(root, text=f'Sunset: {sunsetAdjusted} local time').place(x=5,y=175)
+            Label(root, text=f'Current weather in {locName} ({longitude}, {latitude}): {weather}').place(x=5,y=100)
+            Label(root, text=f'Condition: {weatherAdvanced}').place(x=5,y=125)
+            Label(root, text=f'Temperature: {temperature}').place(x=5,y=150)
+            Label(root, text=f'Feels like: {feelsLikeTemp}').place(x=5,y=175)
+            Label(root, text=f'Minimum temperature today: {minTemp}').place(x=5,y=200)
+            Label(root, text=f'Maximum temperature today: {maxTemp}').place(x=5,y=225)
+            Label(root, text=f'Visibility: {visibility}').place(x=5,y=250)
+            Label(root, text=f'Sunrise: {sunriseAdjusted} local time').place(x=5,y=275)
+            Label(root, text=f'Sunset: {sunsetAdjusted} local time').place(x=5,y=300)
+            imageLabel.Pack()
+            
+            
+    
     elif(errorCode==401):
         Label(root, text=f'401: Authentication Error').place(x=5,y=100)
         print('code401')
@@ -87,24 +112,18 @@ userInputCity.grid(row=1, column=1)
 
 userInputSystem = IntVar()
 requestMeasurementSystem = "imperial"
-Radiobutton(root, text='°F', variable=userInputSystem, value=1).place(x=50,y=5)
-Radiobutton(root,text='°C', variable=userInputSystem, value=2).place(x=75,y=5)
+Radiobutton(root, text='°F', variable=userInputSystem, value=1).grid(row=1,column=2)
+Radiobutton(root,text='°C', variable=userInputSystem, value=2).grid(row=1,column=3)
 
 userComplexity = IntVar()
-userComplexity = 1
-Radiobutton(root,text='Simple', variable=userComplexity, value=1).place(x=5,y=5)
-Radiobutton(root,text='Advanced',variable=userComplexity, value=2).place(x=25,y=5)
+Radiobutton(root,text='Simple', variable=userComplexity, value=1).grid(row=2,column=1)
+Radiobutton(root,text='Advanced',variable=userComplexity, value=2).grid(row=2,column=2)
 
 
 print(userInputCity)
 print(requestMeasurementSystem)
 
-goButton=Button(root, text="OK", command=runWeatherGet, width = 5).grid(row=1, column=6)
+goButton=Button(root, text="OK", command=runWeatherGet, width = 5).grid(row=1, column=7)
 
 
 mainloop()
-
-
-
-
-
