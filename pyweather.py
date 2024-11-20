@@ -54,15 +54,15 @@ def runWeatherGet():
     advancedSunsetLabel=tkinter.Label(root, text=f'Loading')
     advancedSunsetLabel.place(x=5,y=300)
     
-    simpleConditionLabel.master.destroy()
-    simpleTemperatureLabel.master.destroy()
-    advancedConditionLabel.master.destroy()
-    advancedFeelsLikeTempLabel.master.destroy()
-    advancedMaxTempLabel.master.destroy()
-    advancedMinTempLabel.master.destroy()
-    advancedSunriseLabel.master.destroy()
-    advancedSunsetLabel.master.destroy()
-    advancedWeatherLabel.master.destroy()
+    simpleConditionLabel.destroy()
+    simpleTemperatureLabel.destroy()
+    advancedConditionLabel.destroy()
+    advancedFeelsLikeTempLabel.destroy()
+    advancedMaxTempLabel.destroy()
+    advancedMinTempLabel.destroy()
+    advancedSunriseLabel.destroy()
+    advancedSunsetLabel.destroy()
+    advancedWeatherLabel.destroy()
 
     
     if(errorCode==200):
