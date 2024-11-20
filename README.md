@@ -6,6 +6,8 @@ Work in progress
 * Now with weather icons!
 
 <img src="https://cloud-czx72xike-hack-club-bot.vercel.app/0image.png">
+<img src="https://cloud-j88unvbof-hack-club-bot.vercel.app/0image.png">
+<img src="https://cloud-lyregz921-hack-club-bot.vercel.app/0image.png">
 
 Demo video: https://drive.google.com/file/d/1Ha_gfC4wUOQOWDWSL2af8gJM7K44iiWC/view?usp=sharing
 
