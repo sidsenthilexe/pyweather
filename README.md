@@ -2,10 +2,10 @@
 Simple weather app in python with GUI
 * Simple and Advanced modes
 * Metric and Imperial units
+* Fixed text artifacting
 * Now with weather icons!
 
 To Do:
-* Fix text artifacting
 * Fix some weather icons not working properly
 
 <img src="https://cloud-czx72xike-hack-club-bot.vercel.app/0image.png">
