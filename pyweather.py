@@ -61,9 +61,7 @@ def runWeatherGet():
         iconInter = f"{iconFile}.png"
         image=PhotoImage(file=iconInter)
         print(iconInter)
-        image2=tkinter.PhotoImage(file=iconInter)
-        imageLabel=tkinter.Label(root,image=image2)
-        imageLabel.place(x=400,y=100)
+        
         
 
     
@@ -72,6 +70,9 @@ def runWeatherGet():
             #locName, weather, temperature.
             Label(root, text=f'Current weather in {locName}: {weather}').place(x=5,y=100)
             Label(root, text=f'Temperature: {temperature}').place(x=5,y=125)
+            image2=tkinter.PhotoImage(file=iconInter)
+            imageLabel=tkinter.Label(root,image=image2)
+            imageLabel.place(x=400,y=100)
             imageLabel.Pack()
         elif(userComplexityVar==2):
             print('selectedAdvanced')
@@ -85,6 +86,9 @@ def runWeatherGet():
             Label(root, text=f'Visibility: {visibility}').place(x=5,y=250)
             Label(root, text=f'Sunrise: {sunriseAdjusted} local time').place(x=5,y=275)
             Label(root, text=f'Sunset: {sunsetAdjusted} local time').place(x=5,y=300)
+            image2=tkinter.PhotoImage(file=iconInter)
+            imageLabel=tkinter.Label(root,image=image2)
+            imageLabel.place(x=400,y=100)
             imageLabel.Pack()
             
             
