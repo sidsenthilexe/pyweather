@@ -30,6 +30,8 @@ def runWeatherGet():
     
     errorCode = (getWeatherData.json()['cod'])
     print(errorCode)
+    
+    #Clear any existing text on screen to solve text artifacting.
     simpleConditionLabel=tkinter.Label(root, text=f'                                                               ')
     simpleConditionLabel.place(x=5,y=100)
     simpleTemperatureLabel=tkinter.Label(root, text=f'                                                               ')
