@@ -145,7 +145,6 @@ def runWeatherGet():
         Label(root, text=f'Unknown Error').place(x=5,y=100)
         print('error')
 
-
 title = Label(root, text='pyweather').grid(row=0)
 
 Label(root, text='City: ').grid(row=1)
