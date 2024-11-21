@@ -4,6 +4,7 @@ from datetime import datetime
 import os
 import tkinter as tkinter
 from tkinter import *
+
 root = Tk()
 root.geometry("600x400")
 
@@ -51,9 +52,6 @@ def run_weather_get():
     advanced_sunset_label=tkinter.Label(root, text=f'                                                                                                                            ')
     advanced_sunset_label.place(x=5,y=300)
     
-    
-
-    
     if(error_code==200):
         #Code 200 is a success
 
@@ -69,7 +67,6 @@ def run_weather_get():
         max_temperature = round(access_weather_data.json()['main']['temp_max'], 2)
 
         visibility = (access_weather_data.json()['visibility'])
-
 
         longitude = round(access_weather_data.json()['coord']['lon'], 5)
         latitude = round(access_weather_data.json()['coord']['lat'], 5)
