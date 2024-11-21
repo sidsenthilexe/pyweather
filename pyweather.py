@@ -10,7 +10,6 @@ root.geometry("600x400")
 load_dotenv()
 API_KEY=os.getenv('API_KEY')
 
-
 def run_weather_get():
     #Get the user's inputs and create the proper variables needed to access weather data.
     user_blank_input = user_input_city.get()
