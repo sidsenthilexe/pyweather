@@ -102,7 +102,7 @@ def runWeatherGet():
             simpleTemperatureLabel.place(x=5,y=125)
             image2=tkinter.PhotoImage(file=iconInter)
             imageLabel=tkinter.Label(root,image=image2)
-            imageLabel.place(x=400,y=100)
+            imageLabel.place(x=300,y=100)
             imageLabel.Pack()
         elif(userComplexityVar==2):
             print('selectedAdvanced')
@@ -127,7 +127,7 @@ def runWeatherGet():
             advancedSunsetLabel.place(x=5,y=300)
             image2=tkinter.PhotoImage(file=iconInter)
             imageLabel=tkinter.Label(root,image=image2)
-            imageLabel.place(x=400,y=100)
+            imageLabel.place(x=300,y=100)
             imageLabel.Pack()
             
             
