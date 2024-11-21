@@ -11,8 +11,8 @@ load_dotenv()
 API_KEY=os.getenv('API_KEY')
 
 
-def runWeatherGet():
-    print("button pressed")
+def run_weather_get():
+    #Get the user's inputs and create the proper variables needed to access weather data.
     user_blank_input = user_input_city.get()
     user_button_input = user_input_system.get()
     user_complexity = user_input_complexity.get()
@@ -22,13 +22,11 @@ def runWeatherGet():
     elif user_button_input == 2:
         measurement_system = "metric"
     
+    #Access weather data from OpenWeatherMap API
     access_weather_data = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={user_blank_input}&units={measurement_system}&APPID={API_KEY}")
     print(access_weather_data.json())
-    print(user_blank_input)
-    print(user_input_system)
     
     error_code = (access_weather_data.json()['cod'])
-    print(error_code)
     
     #Clear any existing text on screen to solve text artifacting.
     simple_condition_label=tkinter.Label(root, text=f'                                                               ')
@@ -59,10 +57,10 @@ def runWeatherGet():
 
     
     if(error_code==200):
-        print('code200')
+        #Code 200 is a success
 
+        #Stage all necessary weather variables from the imported json
         location_name = (access_weather_data.json()['name'])
-        print(location_name)
 
         weather = (access_weather_data.json()['weather'][0]['main'])
         weather_advanced = (access_weather_data.json()['weather'][0]['description'])
@@ -87,14 +85,10 @@ def runWeatherGet():
         icon_file_identifier = (access_weather_data.json()['weather'][0]['description'])
       
         icon_filename = f"{icon_file_identifier}.png"
-        print(icon_filename)
         
-        
-
-    
         if(user_complexity==1):
-            print('selectedSimple')
-            #locName, weather, temperature.
+            #Simple mode
+            #Stage and place labels for simple mode
             simple_condition_label=tkinter.Label(root, text=f'Current weather in {location_name}: {weather}')
             simple_condition_label.place(x=5,y=100)
             simple_temperature_label=tkinter.Label(root, text=f'Temperature: {temperature}')
@@ -104,8 +98,8 @@ def runWeatherGet():
             image_label.place(x=300,y=100)
             image_label.Pack()
         elif(user_complexity==2):
-            print('selectedAdvanced')
-            #locName, longitude, latitude, weather, weatherAdvanced, temperature, feelsLikeTemp, minTemp, maxTemp, visibility, sunrise adjusted, sunset adjusted.
+            #Advanced mode
+            #Stage and place labels for advanced mode
             advanced_condition_label=tkinter.Label(root, text=f'Current weather in {location_name} ({longitude}, {latitude}): {weather}')
             advanced_condition_label.place(x=5,y=100)
             advanced_weather_label=tkinter.Label(root, text=f'Condition: {weather_advanced}')
@@ -130,26 +124,22 @@ def runWeatherGet():
             image_label.Pack()
             
             
-    
+    #Other error codes
     elif(error_code==401):
         Label(root, text=f'401: Authentication Error').place(x=5,y=100)
-        print('code401')
     elif(error_code==404):
         Label(root, text=f'404: Invalid City Entered').place(x=5,y=100)
-        print('code404')
     elif(error_code==400):
         Label(root, text=f'400: Invalid City Entered').place(x=5,y=100)
-        print('code400')
     else:
         Label(root, text=f'Unknown Error').place(x=5,y=100)
-        print('error')
 
+#Init labels for title, text entry, radio buttons, go button
 title = Label(root, text='pyweather').grid(row=0)
 
 Label(root, text='City: ').grid(row=1)
 user_input_city = Entry(root)
 user_input_city.grid(row=1, column=1)
-
 
 user_input_system = IntVar()
 measurement_system = "imperial"
@@ -160,11 +150,6 @@ user_input_complexity = IntVar()
 Radiobutton(root,text='Simple', variable=user_input_complexity, value=1).grid(row=2,column=1)
 Radiobutton(root,text='Advanced',variable=user_input_complexity, value=2).grid(row=2,column=2)
 
-
-print(user_input_city)
-print(measurement_system)
-
-ok_button=Button(root, text="OK", command=runWeatherGet, width = 5).grid(row=1, column=7)
-
+ok_button=Button(root, text="OK", command=run_weather_get, width = 5).grid(row=1, column=7)
 
 mainloop()
