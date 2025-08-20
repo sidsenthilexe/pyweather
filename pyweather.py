@@ -11,6 +11,18 @@ root.geometry("600x400")
 load_dotenv()
 API_KEY=os.getenv('API_KEY')
 
+def set_cupertino():
+    user_input_city.delete(0, END)
+    user_input_city.insert(0, "Cupertino")
+
+def set_newyork():
+    user_input_city.delete(0, END)
+    user_input_city.insert(0, "New York")
+
+def set_london():
+    user_input_city.delete(0, END)
+    user_input_city.insert(0, "London")
+
 def run_weather_get():
     #Get the user's inputs and create the proper variables needed to access weather data.
     user_blank_input = user_input_city.get()
@@ -144,6 +156,11 @@ Radiobutton(root,text='°C', variable=user_input_system, value=2).grid(row=1,col
 user_input_complexity = IntVar()
 Radiobutton(root,text='Simple', variable=user_input_complexity, value=1).grid(row=2,column=1)
 Radiobutton(root,text='Advanced',variable=user_input_complexity, value=2).grid(row=2,column=2)
+
+# Default city buttons
+Button(root, text="Cupertino", command=set_cupertino, width=10).grid(row=3, column=1)
+Button(root, text="New York", command=set_newyork, width=10).grid(row=3, column=2)
+Button(root, text="London", command=set_london, width=10).grid(row=3, column=3)
 
 ok_button=Button(root, text="OK", command=run_weather_get, width = 5).grid(row=1, column=7)
 
